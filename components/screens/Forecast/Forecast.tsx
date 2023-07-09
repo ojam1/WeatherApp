@@ -1,9 +1,10 @@
 import { View, Text } from 'react-native';
 
-import appStyles from '../../../appStyles';
+import fonts from '../../../styles/text';
+import main from '../../../styles/main';
 
 export default () => (
-  <View style={appStyles.main}>
-    <Text>Forecast</Text>
+  <View style={main.screenContainer}>
+    <Text style={fonts.large}>Forecast</Text>
   </View>
 );
