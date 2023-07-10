@@ -23,7 +23,7 @@ const getFont = (
   fontWeight,
   lineHeight: getLineHeight(fontSize),
   color: colours['text'],
-  letterSpacing: fontSize * 0.12
+  letterSpacing: fontSize * 0.05
 });
 
 const fonts = {
