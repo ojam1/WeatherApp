@@ -11,15 +11,11 @@ import type { GeolocationError } from '@react-native-community/geolocation';
 
 import fonts from '../../../styles/text';
 import main from '../../../styles/main';
+import getWeather from '../../../hooks/getWeather';
 
-type Location =
-  | {
-      latitude: number;
-      longitude: number;
-    }
-  | { city: string };
+export type Location = { latitude?: number; longitude?: number; city?: string };
 
-type Error = {
+export type Error = {
   geoLocationError?: GeolocationError;
   locationPermissionError?: unknown;
 };
@@ -30,6 +26,8 @@ export default () => {
     longitude: 0
   });
   const [error, setError] = useState<Error>();
+
+  const { data, apiError } = getWeather(location, error);
 
   useEffect(() => {
     const requestLocationPermission = async () => {
@@ -69,7 +67,6 @@ export default () => {
     );
   }, []);
 
-  console.log(location, error);
   return (
     <View style={main.screenContainer}>
       <Text style={fonts.xLarge}>Home</Text>
