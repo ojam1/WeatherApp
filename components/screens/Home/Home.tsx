@@ -4,14 +4,15 @@ import {
   View,
   Text,
   Platform,
-  TextInput
+  TextInput,
+  Image
 } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import type { GeolocationError } from '@react-native-community/geolocation';
 
 import fonts from '../../../styles/text';
 import main from '../../../styles/main';
-import getWeather from '../../../hooks/getWeather';
+import getWeather from '../../../hooks/getCurrentWeather';
 
 export type Location = { latitude?: number; longitude?: number; city?: string };
 
@@ -69,7 +70,6 @@ export default () => {
 
   return (
     <View style={main.screenContainer}>
-      <Text style={fonts.xLarge}>Home</Text>
       {error && (
         <TextInput
           placeholder='Enter City'
@@ -77,6 +77,17 @@ export default () => {
           inputMode='text'
           onEndEditing={input => setLocation({ city: input.nativeEvent.text })}
         />
+      )}
+      {data?.condition && (
+        <>
+          <Image
+            source={{ uri: `https:${data.condition.icon}` }}
+            style={{ height: 60, width: 60 }}
+          />
+          <Text style={fonts.small}>{data.condition.text}</Text>
+          <Text style={fonts.small}>Feels like: {data.feelslike_c}°C</Text>
+          <Text style={fonts.small}>Actual: {data.temp_c}°C</Text>
+        </>
       )}
     </View>
   );

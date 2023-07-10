@@ -1,7 +1,7 @@
 import { useMemo, useState, useEffect } from 'react';
 import { Location, Error } from '../components/screens/Home/Home';
 
-export default (location: Location, error?: Error) => {
+export default (location: Location, error?: Error): any => {
   const [apiError, setApiError] = useState();
   const [data, setData] = useState();
 
