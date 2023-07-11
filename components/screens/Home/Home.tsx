@@ -15,6 +15,7 @@ import fonts from '../../../styles/text';
 import main from '../../../styles/main';
 import getWeather from '../../../hooks/getCurrentWeather';
 import styles from './home.styles';
+import Weather from '../../atoms/Weather/Weather';
 export type Location = { latitude?: number; longitude?: number; city?: string };
 
 export type Error = {
@@ -83,19 +84,16 @@ export default () => {
           })
         }
       />
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        {data?.condition && (
-          <>
-            <Image
-              source={{ uri: `https:${data.condition.icon}` }}
-              style={{ height: 64, width: 64 }}
-            />
-            <Text style={fonts.small}>{data.condition.text}</Text>
-            <Text style={fonts.small}>Feels like: {data.feelslike_c}°C</Text>
-            <Text style={fonts.small}>Actual: {data.temp_c}°C</Text>
-          </>
-        )}
-      </View>
+      {data?.condition && (
+        <Weather
+          icon={data.condition.icon}
+          text={{
+            main: data.condition.text,
+            temp1: `Feels like: ${data.feelslike_c}°C`,
+            temp2: `Actual: ${data.temp_c}°C`
+          }}
+        />
+      )}
     </View>
   );
 };
