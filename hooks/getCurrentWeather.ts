@@ -6,12 +6,10 @@ export default (location: Location, error?: Error): any => {
   const [data, setData] = useState();
 
   useEffect(() => {
-    const query = error
-      ? location.city
-      : `${location.latitude},${location.longitude}`;
-
+    const query =  location.city || `${location.latitude},${location.longitude}`;
+    
     const url = `https://api.weatherapi.com/v1/current.json?key=1acfb849da30471a925214152230907&q=${query}&aqi=no`;
-
+    
     const getData = async () => {
       const response = await fetch(url);
 

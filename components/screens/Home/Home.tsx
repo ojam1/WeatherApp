@@ -5,7 +5,8 @@ import {
   Text,
   Platform,
   TextInput,
-  Image
+  Image,
+  Switch
 } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import type { GeolocationError } from '@react-native-community/geolocation';
@@ -23,8 +24,8 @@ export type Error = {
 
 export default () => {
   const [location, setLocation] = useState<Location>({
-    latitude: 0,
-    longitude: 0
+    latitude: undefined,
+    longitude: undefined
   });
   const [error, setError] = useState<Error>();
 
@@ -70,25 +71,40 @@ export default () => {
 
   return (
     <View style={main.screenContainer}>
-      {error && (
-        <TextInput
-          placeholder='Enter City'
-          style={fonts.medium}
-          inputMode='text'
-          onEndEditing={input => setLocation({ city: input.nativeEvent.text })}
-        />
-      )}
-      {data?.condition && (
-        <>
-          <Image
-            source={{ uri: `https:${data.condition.icon}` }}
-            style={{ height: 60, width: 60 }}
-          />
-          <Text style={fonts.small}>{data.condition.text}</Text>
-          <Text style={fonts.small}>Feels like: {data.feelslike_c}°C</Text>
-          <Text style={fonts.small}>Actual: {data.temp_c}°C</Text>
-        </>
-      )}
+      <TextInput
+        placeholder='Enter City'
+        style={[
+          fonts.medium,
+          {
+            padding: 5,
+            marginTop: 20,
+            borderWidth: 1,
+            textAlign: 'center',
+            width: '60%'
+          }
+        ]}
+        inputMode='text'
+        onEndEditing={input =>
+          setLocation({
+            city: input.nativeEvent.text,
+            latitude: location.latitude,
+            longitude: location.longitude
+          })
+        }
+      />
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        {data?.condition && (
+          <>
+            <Image
+              source={{ uri: `https:${data.condition.icon}` }}
+              style={{ height: 64, width: 64 }}
+            />
+            <Text style={fonts.small}>{data.condition.text}</Text>
+            <Text style={fonts.small}>Feels like: {data.feelslike_c}°C</Text>
+            <Text style={fonts.small}>Actual: {data.temp_c}°C</Text>
+          </>
+        )}
+      </View>
     </View>
   );
 };

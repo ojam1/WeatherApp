@@ -6,12 +6,7 @@ type Font = {
   fontFamily: string;
   letterSpacing: number;
   fontWeight: TextStyle['fontWeight'];
-  lineHeight: number;
   color: string;
-};
-
-const getLineHeight = (fontSize: number): number => {
-  return fontSize <= 24 ? fontSize * 1.5 : fontSize * 1.38;
 };
 
 const getFont = (
@@ -21,7 +16,6 @@ const getFont = (
   fontSize,
   fontFamily: 'sans-serif',
   fontWeight,
-  lineHeight: getLineHeight(fontSize),
   color: colours['text'],
   letterSpacing: fontSize * 0.05
 });
