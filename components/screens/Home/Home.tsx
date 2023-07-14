@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, TextInput } from 'react-native';
+import { View, TextInput, Text } from 'react-native';
 import type { GeolocationError } from '@react-native-community/geolocation';
 
 import fonts from '../../../styles/text';
@@ -7,6 +7,7 @@ import main from '../../../styles/main';
 import getWeather from '../../../hooks/getCurrentWeather';
 import Weather from '../../atoms/Weather/Weather';
 import getLocation from '../../../hooks/getLocation';
+import Error from '../../atoms/Error/Error';
 export type Location = { latitude?: number; longitude?: number; city?: string };
 
 export type Error = {
@@ -32,7 +33,7 @@ export default () => {
   useEffect(() => {
     setWeatherData(data);
   }, [data]);
-
+  console.log(apiError, error);
   return (
     <View style={main.screenContainer}>
       <TextInput
@@ -47,6 +48,7 @@ export default () => {
           })
         }
       />
+      {!!apiError && <Error message={apiError.message as string} />}
       {weatherData?.current?.condition && (
         <Weather
           date={weatherData?.current?.last_updated.slice(0, 10)}

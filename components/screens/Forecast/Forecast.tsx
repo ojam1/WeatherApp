@@ -6,7 +6,9 @@ import fonts from '../../../styles/text';
 import main from '../../../styles/main';
 import getWeather from '../../../hooks/getCurrentWeather';
 import Weather from '../../atoms/Weather/Weather';
+import Error from '../../atoms/Error/Error';
 import getLocation from '../../../hooks/getLocation';
+
 export type Location = { latitude?: number; longitude?: number; city?: string };
 
 export type Error = {
@@ -47,6 +49,7 @@ export default () => {
           })
         }
       />
+      {!!apiError && <Error message={apiError.message as string} />}
       {weatherData?.forecast?.forecastday && (
         <ScrollView horizontal>
           {weatherData?.forecast?.forecastday.map(
