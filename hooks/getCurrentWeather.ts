@@ -26,8 +26,6 @@ export default (location: Location, error?: Error): any => {
     getData();
   }, [location, error]);
 
-  console.log(data);
-
   return useMemo(
     () => ({
       data,

@@ -10,13 +10,15 @@ type Props = {
     temp1: string;
     temp2: string;
   };
+  date: string;
 };
 
-export default ({ icon, text }: Props) => {
+export default ({ icon, text, date }: Props) => {
   const { main, temp1, temp2 } = text;
   
   return (
     <View style={styles.container}>
+      <Text style={fonts.small}>{date}</Text>
       <Image source={{ uri: `https:${icon}` }} style={styles.image} />
       <Text style={fonts.small}>{main}</Text>
       <Text style={fonts.small}>{temp1}</Text>

@@ -6,6 +6,13 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    height: '100%',
+    height: '100%'
+  },
+  textInput: {
+    padding: 5,
+    marginTop: 20,
+    borderWidth: 1,
+    textAlign: 'center',
+    width: '60%'
   }
 });

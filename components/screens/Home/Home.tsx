@@ -5,7 +5,6 @@ import type { GeolocationError } from '@react-native-community/geolocation';
 import fonts from '../../../styles/text';
 import main from '../../../styles/main';
 import getWeather from '../../../hooks/getCurrentWeather';
-import styles from './home.styles';
 import Weather from '../../atoms/Weather/Weather';
 import getLocation from '../../../hooks/getLocation';
 export type Location = { latitude?: number; longitude?: number; city?: string };
@@ -38,7 +37,7 @@ export default () => {
     <View style={main.screenContainer}>
       <TextInput
         placeholder='Enter City'
-        style={[fonts.medium, styles.textInput]}
+        style={[fonts.medium, main.textInput]}
         inputMode='text'
         onEndEditing={input =>
           setUserEnteredlocation({
@@ -50,6 +49,7 @@ export default () => {
       />
       {weatherData?.current?.condition && (
         <Weather
+          date={weatherData?.current?.last_updated.slice(0, 10)}
           icon={weatherData.current.condition.icon}
           text={{
             main: weatherData.current.condition.text,
