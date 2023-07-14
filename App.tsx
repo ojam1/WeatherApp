@@ -4,7 +4,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ForecastScreen from './components/screens/Forecast/Forecast';
 import HomeScreen from './components/screens/Home/Home';
 
-const Tab = createBottomTabNavigator();
+type TabProps = {
+  Home: undefined;
+  Forecast: undefined;
+};
+
+const Tab = createBottomTabNavigator<TabProps>();
 
 export default () => {
   return (

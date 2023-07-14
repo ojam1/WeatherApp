@@ -6,24 +6,27 @@ export default (location: Location, error?: Error): any => {
   const [data, setData] = useState();
 
   useEffect(() => {
-    const query =  location.city || `${location.latitude},${location.longitude}`;
-    
-    const url = `https://api.weatherapi.com/v1/current.json?key=1acfb849da30471a925214152230907&q=${query}&aqi=no`;
-    
+    const query = !!location.city
+      ? location.city
+      : `${location.latitude},${location.longitude}`;
+
+    const url = `https://api.weatherapi.com/v1/forecast.json?key=1acfb849da30471a925214152230907&q=${query}&days=5&aqi=no&alerts=no`;
+
     const getData = async () => {
       const response = await fetch(url);
 
       const result = await response.json();
       if (result.error) {
         setApiError(result.error);
-        setData(undefined);
       } else {
         setApiError(undefined);
-        setData(result.current);
+        setData(result);
       }
     };
     getData();
   }, [location, error]);
+
+  console.log(data);
 
   return useMemo(
     () => ({
