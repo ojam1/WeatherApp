@@ -10,7 +10,7 @@ export default (location: Location, error?: Error): any => {
       ? location.city
       : `${location.latitude},${location.longitude}`;
 
-    const url = `https://api.weatherapi.com/v1/forecast.json?key=1acfb849da30471a925214152230907&q=${query}&days=5&aqi=no&alerts=no`;
+    const url = `https://api.weatherapi.com/v1/forecast.json?key=*&q=${query}&days=5&aqi=no&alerts=no`;
 
     const getData = async () => {
       const response = await fetch(url);
